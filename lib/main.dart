@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.deepOrange,
       ),
       darkTheme: kDarkTheme,
-      home: WelcomeScreen(),
+      home:WelcomeScreen() ,
     );
   }
 }

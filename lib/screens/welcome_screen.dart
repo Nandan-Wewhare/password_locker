@@ -13,11 +13,11 @@ class WelcomeScreen extends StatelessWidget {
         resizeToAvoidBottomPadding: true,
         body: SafeArea(
           child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                        'https://i.pinimg.com/originals/ad/cf/ef/adcfef3a3120edd9e4d1a344e24fe494.jpg'))),
+            // decoration: BoxDecoration(
+            //     image: DecorationImage(
+            //         fit: BoxFit.fill,
+            //         image: NetworkImage(
+            //             'https://i.pinimg.com/originals/ad/cf/ef/adcfef3a3120edd9e4d1a344e24fe494.jpg'))),
             alignment: Alignment.center,
             padding: const EdgeInsets.all(12),
             child: SingleChildScrollView(
