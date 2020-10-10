@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:password_locker/Keyboard/keyboard.dart';
+import 'package:password_locker/screens/recovery_screen.dart';
 
 class PinputScreen extends StatefulWidget {
   @override
@@ -38,7 +39,9 @@ class _PinputScreenState extends State<PinputScreen> {
             flex: 1,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) { return Recovery(); }));
+            },
             child: const Text('Forgot Pin?',
                 style: TextStyle(
                   fontSize: 18,

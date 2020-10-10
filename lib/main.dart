@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:password_locker/constants.dart';
-import 'package:password_locker/screens/welcome_screen.dart';
+import 'package:password_locker/screens/pinput_screen.dart';
+import 'package:password_locker/screens/recovery_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.deepOrange,
       ),
       darkTheme: kDarkTheme,
-      home:WelcomeScreen() ,
+      home:PinputScreen() ,
     );
   }
 }
+
