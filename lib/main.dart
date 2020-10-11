@@ -1,12 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:password_locker/constants.dart';
-import 'package:password_locker/screens/pinput_screen.dart';
-import 'package:password_locker/screens/recovery_screen.dart';
+import 'package:password_locker/pref.dart';
+import 'screens/pinput_screen.dart';
+import 'screens/welcome_screen.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Status status = Status();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,8 +24,21 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.deepOrange,
       ),
       darkTheme: kDarkTheme,
-      home:PinputScreen() ,
+      home: FutureBuilder(
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return snapshot.data ? PinputScreen() : WelcomeScreen();
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Please try again.'));
+          }
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.deepOrange,
+            ),
+          );
+        },
+        future: status.registeredStatus,
+      ),
     );
   }
 }
-

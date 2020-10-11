@@ -40,14 +40,19 @@ class _PinputScreenState extends State<PinputScreen> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) { return Recovery(); }));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                return Recovery();
+              }));
             },
-            child: const Text('Forgot Pin?',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w300,
-                  decoration: TextDecoration.underline,
-                )),
+            child: const Text(
+              'Forgot Pin?',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w300,
+                decoration: TextDecoration.underline,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 22.0),
@@ -66,10 +71,12 @@ class _PinputScreenState extends State<PinputScreen> {
                   letterSpacing: 4,
                 ),
                 decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12))),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
             ),
           ),

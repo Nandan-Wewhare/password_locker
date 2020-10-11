@@ -8,9 +8,8 @@ var kDarkTheme = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: const Color(0xff141414),
   focusColor: Colors.deepOrange,
   indicatorColor: Colors.deepOrange,
-
   textTheme: const TextTheme(
-    bodyText2: TextStyle(color: Colors.deepOrange), 
+    bodyText2: TextStyle(color: Colors.deepOrange),
   ),
   iconTheme: const IconThemeData(
     color: Colors.deepOrange,
@@ -23,5 +22,13 @@ var kDarkTheme = ThemeData.dark().copyWith(
             fontSize: 22,
             fontWeight: FontWeight.w600),
       )),
-accentColor:Colors.deepOrange,
+  accentColor: Colors.deepOrange,
 );
+const List<String> kQuestions = [
+  'Select a Security Question (required)',
+  'What was your childhood nickname?',
+  'What school did you attend for sixth grade?',
+  'In what city does your nearest sibling live?',
+  'What was your dream job as a child?',
+  'What is your mother\'s middle name?'
+];
