@@ -10,25 +10,21 @@ class KeyBoardKey extends StatelessWidget {
     return Material(
       shape: CircleBorder(),
       color: Colors.transparent,
-        child: InkWell(
-      onTap: () {
-        if(controller.text.length!=6)
-        controller.text += value;
-        print('Key Pressed : $value');
-      },
-      child: Ink(
-        color: Colors.transparent,
-        child: Center(
-          child: Text(
-            value,
-            textScaleFactor: 2,
-            style: TextStyle(
-              //color: Colors.purple,
+      child: InkWell(
+        onTap: () {
+          if (controller.text.length != 6) controller.text += value;
+        },
+        child: Ink(
+          color: Colors.transparent,
+          child: Center(
+            child: Text(
+              value,
+              textScaleFactor: 2,
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 }
 
@@ -43,12 +39,12 @@ class KeyBoardAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      
       shape: CircleBorder(),
       color: Colors.transparent,
-        child: InkWell(
-      onTap: onTap,
-      child: Ink( child: child),
-    ));
+      child: InkWell(
+        onTap: onTap,
+        child: Ink(child: child),
+      ),
+    );
   }
 }

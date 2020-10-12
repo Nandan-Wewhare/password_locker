@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+
 class SlidableCard extends StatefulWidget {
   final String title;
   final Widget icon;
@@ -9,7 +10,8 @@ class SlidableCard extends StatefulWidget {
       {Key key,
       @required this.icon,
       @required this.password,
-      @required this.title})
+      @required this.title,
+      })
       : super(key: key);
 
   @override
@@ -95,7 +97,9 @@ class _SlidableCardState extends State<SlidableCard> {
         IconButton(
             tooltip: 'Delete Item',
             icon: Icon(Icons.delete_forever_outlined),
-            onPressed: () {})
+            onPressed: () {
+              setState(() {});
+            })
       ],
     );
   }

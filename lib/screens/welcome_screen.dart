@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:password_locker/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:password_locker/pref.dart';
+import 'package:password_locker/screens/pinput_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -14,6 +17,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final TextEditingController _pinController = TextEditingController();
   final TextEditingController _cnfPinController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  Status status = Status();
+
   String pinValidator(String value) {
     String pattern = r'^[0-9]{1,6}$';
     RegExp reg = RegExp(pattern);
@@ -47,6 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomPadding: true,
       body: SafeArea(
         child: Container(
@@ -95,7 +102,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                     SizedBox(height: size.height / 40),
-                    // dropdown menu here
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.0),
@@ -113,16 +119,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           value: _selected,
                           items: kQuestions.map((ques) {
                             return DropdownMenuItem<String>(
-                              child: Text(
-                                ques,
+                              child: Center(
+                                child: Text(
+                                  ques,
+                                ),
                               ),
                               value: ques,
                             );
                           }).toList(),
                           onChanged: (value) {
-                            setState(() {
-                              _selected = value;
-                            });
+                            setState(() => _selected = value);
                           },
                         ),
                       ),
@@ -142,6 +148,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                     SizedBox(height: size.height / 40),
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       controller: _pinController,
                       validator: pinValidator,
                       maxLength: 6,
@@ -156,6 +163,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                     SizedBox(height: size.height / 40),
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       controller: _cnfPinController,
                       validator: pinValidator,
                       maxLength: 6,
@@ -174,17 +182,49 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       height: 56,
                       child: RaisedButton(
                         onPressed: () async {
-                          // database code here
                           if (_formKey.currentState.validate()) {
-                            if (_pinController.value ==
-                                _cnfPinController.value) {
+                            if (_pinController.text == _cnfPinController.text) {
                               final storage = FlutterSecureStorage();
+                              _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                  'Please Wait...',
+                                  textScaleFactor: 1.2,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ));
                               await storage.write(
                                   key: 'name', value: _nameController.text);
-                              // complete DB code here
-                            }
-                            else{
-                              // show toast or snackbar if not PIN not same.
+                              await storage.write(
+                                  key: 'question', value: _selected);
+                              await storage.write(
+                                  key: 'answer',
+                                  value: _securityAnsController.text);
+                              await storage.write(
+                                  key: 'pin', value: _pinController.text);
+                              status.setRegistered();
+                              Navigator.pushReplacement(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => PinputScreen()));
+                            } else {
+                              _scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  behavior: SnackBarBehavior.floating,
+                                  content: Text(
+                                    'PIN not matching',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.blueAccent,
+                                  duration: Duration(seconds: 3),
+                                ),
+                              );
                             }
                           }
                         },
